@@ -11,7 +11,7 @@ RUN apt-get install -y git curl apache2 php libapache2-mod-php php-mysql
 # Install app
 RUN rm -rf /var/www/html/*
 
-#ADD and COPY are used in a similar way
+#ADD(local and additiona urls) and COPY(only local files) are used in a similar way
 ADD src /var/www/html/
 
 # Configure apache
