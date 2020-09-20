@@ -5,24 +5,26 @@ FROM ubuntu
 
 ENV DEBIAN_FRONTEND=non-interactive
 # Install dependencies
+#RUN command used to execute command insdie Docker image
 RUN apt-get update -y
 RUN apt-get install -y git curl apache2 php libapache2-mod-php php-mysql
 
 # Install app
 RUN rm -rf /var/www/html/*
 
-#ADD(local and additiona urls i.e externally) and COPY(only local files) are used in a similar way
+#ADD(local and additiona urls i.e externally will automatically unarchive files) and COPY(only local files) are used in a similar way
 ADD src /var/www/html/
 
 # Configure apache
 RUN a2enmod rewrite
 RUN chown -R www-data:www-data /var/www/html
+#ENV is used to create env. variables inside docker image
 ENV APACHE_RUN_DIR /var/www/html
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 
-
+#EXPOSE Exposes port on which application will be hosted
 EXPOSE 80
 
 CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
