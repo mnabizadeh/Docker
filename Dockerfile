@@ -1,4 +1,7 @@
 FROM ubuntu
+#MAINTAINER is used to display the name oand email details of build owner
+#SHELL used to set the default shell
+#COPY used to transfer the local file to Docker container
 
 ENV DEBIAN_FRONTEND=non-interactive
 # Install dependencies
